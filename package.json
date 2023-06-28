@@ -1,0 +1,17 @@
+{
+  "name": "crud",
+  "version": "1.0.0",
+  "description": "Custom CRUD API",
+  "main": "./src/index.ts",
+  "type": "module",
+  "scripts": {},
+  "author": "Ekalape",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.43.0",
+    "nodemon": "^2.0.22",
+    "prettier": "^2.8.8",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.5"
+  }
+}
