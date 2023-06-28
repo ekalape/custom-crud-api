@@ -2,16 +2,27 @@
   "name": "crud",
   "version": "1.0.0",
   "description": "Custom CRUD API",
-  "main": "./src/index.ts",
-  "type": "module",
-  "scripts": {},
+  "scripts": {
+    "dev": "nodemon -r dotenv/config --exec ts-node-esm ./src/index.ts"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "author": "Ekalape",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
+    "@types/node": "^20.3.2",
+    "@typescript-eslint/eslint-plugin": "^5.60.0",
+    "@typescript-eslint/parser": "^5.60.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.3.1",
     "eslint": "^8.43.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "nodemon": "^2.0.22",
     "prettier": "^2.8.8",
     "ts-node": "^10.9.1",
+    "tslib": "^2.6.0",
     "typescript": "^5.1.5"
   }
 }
