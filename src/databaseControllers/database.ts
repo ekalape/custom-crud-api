@@ -1,16 +1,31 @@
 import { User } from '../types'
+import { DataBaseUser } from '../types'
 
 
 export default class {
-    database: User[]
+    private database: DataBaseUser[]
     constructor() {
         this.database = []
     }
-
-    get() { return this.database }
+    get() { return this.database.map(d => ({ id: d.id, ...d.user })) }
     set(user: User) {
-        this.database.push(user)
+        const { id, username, age, hobbies } = user;
+        this.database.push({ id, user: { username, age, hobbies } })
     }
-    getLength() { return this.database.length }
+    update(id: string, data: User) {
+        let oldUser = this.database.find(u => u.id === id)
+        if (!oldUser) return null;
+        else { oldUser.user = { ...oldUser.user, ...data }; return ({ id, ...oldUser.user }) }
+    }
+    delete(id: string) {
+        let user = this.database.find(u => u.id === id)
+        if (!user) throw Error("No user found");
+        else {
+            this.database.filter(u => u.id !== id);
+            return { id, ...user.user }
+        }
+    }
+
+
 
 }

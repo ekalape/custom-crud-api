@@ -4,3 +4,8 @@ export interface User {
     age: number;
     hobbies: string[];
 }
+
+export interface DataBaseUser {
+    id: string;
+    user: Omit<User, "id">
+}
