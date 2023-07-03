@@ -1,10 +1,7 @@
-console.log("running")
 import * as process from 'process';
 import * as http from 'http';
 import * as url from 'url';
-
 import { User } from './types'
-import { EOL } from 'os';
 import * as constants from './utils/constants'
 import { getSingleUser } from './databaseControllers/getSingleUser';
 import Database from './databaseControllers/database'
@@ -13,7 +10,7 @@ import { updateUser } from './databaseControllers/updateUser';
 import { deleteUser } from './databaseControllers/deleteUser';
 import { validate as uuidValidate } from 'uuid';
 
-const PORT = process.env.MAIN_PORT;
+const PORT = process.env.MAIN_PORT || 4000;
 
 
 export const database = new Database()
@@ -33,7 +30,9 @@ export const server = http.createServer((req, res) => {
                     case "GET": {
                         if (!actPath[2]) {
                             res.statusCode = 200;
+                            res.setHeader('Content-Type', 'application/json')
                             res.end(JSON.stringify(database.get(), null, " "))
+
                         }
                         else {
                             if (!uuidValidate(actPath[2])) {
@@ -45,6 +44,7 @@ export const server = http.createServer((req, res) => {
                                 const user = getSingleUser(actPath[2])
                                 if (user) {
                                     res.statusCode = 200;
+                                    res.setHeader('Content-Type', 'application/json')
                                     res.end(JSON.stringify(user, null, " "))
                                 }
                                 else {
@@ -70,6 +70,7 @@ export const server = http.createServer((req, res) => {
                             }
                             if (result) {
                                 res.statusCode = 200;
+                                res.setHeader('Content-Type', 'application/json')
                                 res.end(JSON.stringify(result, null, " "));
                             }
                             else {
@@ -98,7 +99,7 @@ export const server = http.createServer((req, res) => {
                                     const result = updateUser(userid, body);
                                     if (result) {
                                         res.statusCode = 200;
-                                        res.write(`Following user is updated: ${EOL}`)
+                                        res.setHeader('Content-Type', 'application/json')
                                         res.end(JSON.stringify(result, null, " "))
                                     }
                                     else {
@@ -122,7 +123,7 @@ export const server = http.createServer((req, res) => {
                                     const user = deleteUser(actPath[2])
                                     if (user) {
                                         res.statusCode = 204;
-                                        res.write(`Following user is deleted: ${EOL}`)
+                                        res.setHeader('Content-Type', 'application/json')
                                         res.end(JSON.stringify(user, null, " "))
                                     }
                                 } catch (err) {

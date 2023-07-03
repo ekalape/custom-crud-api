@@ -9,6 +9,7 @@ export default class {
     }
     get() { return this.database.map(d => ({ id: d.id, ...d.user })) }
     set(user: User) {
+        if (this.database.find(d => d.id === user.id)) throw Error("User already exists");
         const { id, username, age, hobbies } = user;
         this.database.push({ id, user: { username, age, hobbies } })
     }

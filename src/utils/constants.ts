@@ -6,4 +6,4 @@ export const WRONG_UUID = "Uuid is invalid";
 export const NO_USER_ERROR = "No user found";
 export const NO_USER_ID_ERROR = "User Id is required";
 export const USER_FIELDS_ERROR = "All fields are requested";
-export const WRONG_REQUEST_ERROR = "Wrong request format";
+export const WRONG_REQUEST_ERROR = "User already exists";
