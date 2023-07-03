@@ -10,11 +10,15 @@ export function addNewUser(data: string) {
         throw Error("Parsing error")
     }
     if (userdata) {
-        userdata.id = uuidv4()
+        if (!userdata.id)
+            userdata.id = uuidv4()
         const { username, age, hobbies } = userdata;
         if (!username || !age || !hobbies) return null;
         const user = { ...userdata }
-        database.set(user)
+        try {
+
+            database.set(user)
+        } catch (err) { throw err }
         return user;
     }
     return null;

@@ -10,7 +10,7 @@ import { updateUser } from './databaseControllers/updateUser';
 import { deleteUser } from './databaseControllers/deleteUser';
 import { validate as uuidValidate } from 'uuid';
 
-const PORT = process.env.MAIN_PORT || 4000;
+const PORT = process.env.MAIN_PORT;
 
 
 export const database = new Database()
@@ -64,19 +64,20 @@ export const server = http.createServer((req, res) => {
                         req.on("end", () => {
                             try {
                                 result = addNewUser(body);
+                                if (result) {
+                                    res.statusCode = 200;
+                                    res.setHeader('Content-Type', 'application/json')
+                                    res.end(JSON.stringify(result, null, " "));
+                                }
+                                else {
+                                    res.statusCode = 400;
+                                    res.end(constants.USER_FIELDS_ERROR)
+                                }
                             } catch (err) {
                                 res.statusCode = 400;
                                 res.end(constants.WRONG_REQUEST_ERROR)
                             }
-                            if (result) {
-                                res.statusCode = 200;
-                                res.setHeader('Content-Type', 'application/json')
-                                res.end(JSON.stringify(result, null, " "));
-                            }
-                            else {
-                                res.statusCode = 400;
-                                res.end(constants.USER_FIELDS_ERROR)
-                            }
+
                         })
                         break;
                     }
@@ -148,5 +149,5 @@ export const server = http.createServer((req, res) => {
 
 
 server.listen(PORT)
-console.log(`server is running on port ${PORT}`)
+
 

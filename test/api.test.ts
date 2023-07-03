@@ -1,28 +1,22 @@
 import { server } from '../src/index'
 import { User } from '../src/types'
-import Database from '../src/databaseControllers/database'
+import { v4 as uuidv4 } from 'uuid';
 import request from 'supertest'
 
 
 describe('Api test', () => {
     let api: any;
-    let db: Database;
-    const user1: User = { id: "3", username: "John", age: 22, hobbies: ["footbal", "icecream"] }
-    const user2: User = { id: "12", username: "Mark", age: 94, hobbies: ["sleeping"] }
+    const user1: User = { id: uuidv4(), username: "John", age: 22, hobbies: ["footbal", "icecream"] }
+    const user2: User = { id: uuidv4(), username: "Mark", age: 94, hobbies: ["sleeping"] }
     beforeAll(() => {
-        db = new Database()
         api = server;
-
-
     })
-    /*     afterEach(() => {
-            server.close();
-        }); */
+
     afterAll(() => {
-        server.close();
+        api.close();
     })
-    test("Should get empty database", async () => {
 
+    test("Should get empty database", async () => {
         const response1 = await request(api).get("/api/users")
         expect(response1.status).toEqual(200);
         expect(response1.text).toEqual("[]");
@@ -45,7 +39,6 @@ describe('Api test', () => {
         expect(result.username).toEqual('Jack');
     })
     test('Should get a single user', async () => {
-
         const response = await request(api).get("/api/users")
         const users = JSON.parse(response.text)
         const id = users[0].id
@@ -56,7 +49,6 @@ describe('Api test', () => {
 
         const response = await request(api).get("/api/users")
         const users = JSON.parse(response.text)
-
         const id = users[0].id
         const userResponse = await request(api).put(`/api/users/${id}`).send({ "username": "David" })
         const updatedUser = JSON.parse(userResponse.text)
