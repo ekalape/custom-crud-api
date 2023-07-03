@@ -22,7 +22,7 @@ export const server = http.createServer((req, res) => {
             const { pathname } = url.parse(req.url, true);
             const actPath = pathname?.split("/").filter(Boolean) || [];
 
-            if (actPath.length === 0 || actPath[0] !== constants.API_BASE_NAME || actPath[1] !== constants.API_USERS_ENDPOINT) res.write(constants.WRONG_PATH_ERROR)
+            if (actPath.length === 0 || actPath[0] !== constants.API_BASE_NAME || actPath[1] !== constants.API_USERS_ENDPOINT) res.end(constants.WRONG_PATH_ERROR)
 
             else {
 

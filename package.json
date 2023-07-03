@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Custom CRUD API",
   "scripts": {
-    "dev": "nodemon -r dotenv/config --exec ts-node-esm ./src/index.ts",
+    "start:dev": "nodemon -r dotenv/config --exec ts-node-esm ./src/index.ts",
     "build": "webpack --mode=production",
     "start:prod": "npm run build && node dist/server.js",
     "test": "jest --silent",
