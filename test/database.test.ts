@@ -1,21 +1,16 @@
-import { database, server } from '../src/index'
-import { DataBaseUser, User } from '../src/types'
+
+import { User } from '../src/types'
 import Database from '../src/databaseControllers/database'
 
 
 describe('Api test', () => {
-    let api: any;
     let db: Database;
     const user: User = { id: "3", username: "John", age: 22, hobbies: ["footbal", "icecream"] }
     const user3UpdateData: Partial<User> = { username: "Jack" }
     beforeAll(() => {
         db = new Database()
-        api = server;
 
     })
-    afterAll((done) => {
-        server.close(done);
-    });
 
     test("Should return empty database", () => {
         const data = db.get()

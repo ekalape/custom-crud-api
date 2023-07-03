@@ -1,9 +1,8 @@
-import { database, server } from '../src/index'
-import { DataBaseUser, User } from '../src/types'
+import { server } from '../src/index'
+import { User } from '../src/types'
 import Database from '../src/databaseControllers/database'
 import request from 'supertest'
-import assert from 'assert'
-import supertest from 'supertest'
+
 
 describe('Api test', () => {
     let api: any;

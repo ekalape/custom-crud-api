@@ -10,9 +10,6 @@ export function updateUser(userid: string, data: string) {
         throw Error("Parsing error")
     }
     if (userdata) {
-        console.log("userid", userid)
-
-        database.get().forEach(x => console.log(x.id));
         return database.update(userid, userdata);
     }
 

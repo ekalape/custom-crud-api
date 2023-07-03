@@ -13,9 +13,7 @@ export function addNewUser(data: string) {
         userdata.id = uuidv4()
         const { username, age, hobbies } = userdata;
         if (!username || !age || !hobbies) return null;
-
         const user = { ...userdata }
-        console.log("created user")
         database.set(user)
         return user;
     }
