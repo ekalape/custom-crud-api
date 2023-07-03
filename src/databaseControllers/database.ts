@@ -12,16 +12,19 @@ export default class {
         const { id, username, age, hobbies } = user;
         this.database.push({ id, user: { username, age, hobbies } })
     }
-    update(id: string, data: User) {
+    update(id: string, data: Partial<User>) {
         let oldUser = this.database.find(u => u.id === id)
         if (!oldUser) return null;
-        else { oldUser.user = { ...oldUser.user, ...data }; return ({ id, ...oldUser.user }) }
+        else {
+            oldUser.user = { ...oldUser.user, ...data };
+            return ({ id, ...oldUser.user })
+        }
     }
     delete(id: string) {
         let user = this.database.find(u => u.id === id)
         if (!user) throw Error("No user found");
         else {
-            this.database.filter(u => u.id !== id);
+            this.database = this.database.filter(u => u.id !== id);
             return { id, ...user.user }
         }
     }

@@ -18,7 +18,7 @@ const PORT = process.env.MAIN_PORT;
 
 export const database = new Database()
 
-const server = http.createServer((req, res) => {
+export const server = http.createServer((req, res) => {
     try {
 
         if (req.url) {

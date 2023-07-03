@@ -3,7 +3,7 @@ import { User } from '../types';
 
 export function updateUser(userid: string, data: string) {
 
-    let userdata: User | null = null;
+    let userdata: Partial<User> | null = null;
     try {
         userdata = JSON.parse(data);
     } catch (err) {
@@ -11,6 +11,7 @@ export function updateUser(userid: string, data: string) {
     }
     if (userdata) {
         console.log("userid", userid)
+
         database.get().forEach(x => console.log(x.id));
         return database.update(userid, userdata);
     }
